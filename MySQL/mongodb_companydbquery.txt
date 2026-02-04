@@ -1,0 +1,179 @@
+use mycompany;
+switched to db mycompany
+//show all databases;
+show databases;
+admin    40.00 KiB
+config  108.00 KiB
+local    40.00 KiB
+show collections
+// create a collection
+db.createCollection("Products")
+{ ok: 1 }
+// show collections
+show collections
+Products
+// insert one
+db.Products.insertOne({name:"Laptop", price:50000})
+{
+  acknowledged: true,
+  insertedId: ObjectId('694a194452459d0e48d0cfa7')
+}
+// insert Many
+db.Products.insertMany([{name:"Mouse", price:500},{name:"Keybpard",price:800}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('694a197352459d0e48d0cfa8'),
+    '1': ObjectId('694a197352459d0e48d0cfa9')
+  }
+}
+// show all documents
+db.Products.find()
+{
+  _id: ObjectId('694a194452459d0e48d0cfa7'),
+  name: 'Laptop',
+  price: 50000
+}
+{
+  _id: ObjectId('694a197352459d0e48d0cfa8'),
+  name: 'Mouse',
+  price: 500
+}
+{
+  _id: ObjectId('694a197352459d0e48d0cfa9'),
+  name: 'Keybpard',
+  price: 800
+}
+// find specific documents
+db.Products.find({name:"Mouse"});
+{
+  _id: ObjectId('694a197352459d0e48d0cfa8'),
+  name: 'Mouse',
+  price: 500
+}
+// comparison operators
+db.Products.find({price: {$gte:1000}})
+{
+  _id: ObjectId('694a194452459d0e48d0cfa7'),
+  name: 'Laptop',
+  price: 50000
+}
+db.Products.find({price: {$lt:1000}})
+{
+  _id: ObjectId('694a197352459d0e48d0cfa8'),
+  name: 'Mouse',
+  price: 500
+}
+{
+  _id: ObjectId('694a197352459d0e48d0cfa9'),
+  name: 'Keybpard',
+  price: 800
+}
+db.Products.find({price: {$eq:1000}})
+// gte -> greater than and equal lt-> lesser than eq-> equal
+// sorting data
+db.Products.find().sort({price:1})
+{
+  _id: ObjectId('694a197352459d0e48d0cfa8'),
+  name: 'Mouse',
+  price: 500
+}
+{
+  _id: ObjectId('694a197352459d0e48d0cfa9'),
+  name: 'Keybpard',
+  price: 800
+}
+{
+  _id: ObjectId('694a194452459d0e48d0cfa7'),
+  name: 'Laptop',
+  price: 50000
+}
+db.Products.find().sort({price:-1})
+{
+  _id: ObjectId('694a194452459d0e48d0cfa7'),
+  name: 'Laptop',
+  price: 50000
+}
+{
+  _id: ObjectId('694a197352459d0e48d0cfa9'),
+  name: 'Keybpard',
+  price: 800
+}
+{
+  _id: ObjectId('694a197352459d0e48d0cfa8'),
+  name: 'Mouse',
+  price: 500
+}
+//update one document
+db.Products.updateOne({name:"Mouse"},{$set:{price:600}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.Products.find(name:"Mouse")
+SyntaxError: Unexpected token, expected "," (1:21)
+
+> 1 | db.Products.find(name:"Mouse")
+    |                      ^
+db.Products.find({name:"Mouse"})
+{
+  _id: ObjectId('694a197352459d0e48d0cfa8'),
+  name: 'Mouse',
+  price: 600
+}
+// update multiple documents
+db.Products.updateMany({price:{$lt:1000}},{$set:{Category:Accessories}})
+ReferenceError: Accessories is not defined
+db.Products.updateMany({price:{$lt:1000}},
+                       {$set:{Category:"Accessories"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+db.Products.find()
+{
+  _id: ObjectId('694a194452459d0e48d0cfa7'),
+  name: 'Laptop',
+  price: 50000
+}
+{
+  _id: ObjectId('694a197352459d0e48d0cfa8'),
+  name: 'Mouse',
+  price: 600,
+  Category: 'Accessories'
+}
+{
+  _id: ObjectId('694a197352459d0e48d0cfa9'),
+  name: 'Keybpard',
+  price: 800,
+  Category: 'Accessories'
+}
+// delete one doc
+db.Products.deleteOne({name:"Keybpard"})
+{
+  acknowledged: true,
+  deletedCount: 1
+}
+// delete many documents
+db.Products.deleteMany({price:{$gt:500}})
+{
+  acknowledged: true,
+  deletedCount: 2
+}
+db.Products.find()
+db.Products.insertOne({name:"Laptop", price:50000})
+{
+  acknowledged: true,
+  insertedId: ObjectId('694a268d52459d0e48d0cfaa')
+}
+// aggregation
+mycompany
+Selection deleted
+
+

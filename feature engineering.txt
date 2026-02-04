@@ -1,0 +1,22 @@
+feature engineering:
+1. check for null values + all basic check head, tail, etc
+2. handling null values
+	if null values<2% then we can delete or ignore those rows.
+	greater than 2% replace with mean(few or no outliers/ normal distributed data), median(lot of outliers) or mode(categorical).
+3. handling outliers
+	- IQR method - delete the outliers [less number of outlier]
+	- winsorization method [more number of outliers]- it will cap the outliers. the value below lower limit will be replaced with 25th percentile value 							and above upper limit it will be replaced by the value at 75th percentile
+4. transformation - if data still has outliers. applied for single column. coloumn should have numerical continous data. for discrete and categroical not required.
+log, exponential, reciprocal, sqaure, root, cube root etc transformation
+
+5. scaling - 
+min max[0,1]- has many positive values
+standard[-3,+3] - has almost same number of pos and neg
+robust[-1,+1] sometimes >+3 or <-3 -> lot of negative
+
+6. encoding -> categorical to numberical data
+one hot encoding - value will be in terms of T/F | columns were value cannot be regarded as higher or lower.
+label encoding -assigns value in sequence of a-z from 0 to ...
+ordinal encoding - heirarchy- 
+			
+	

@@ -1,0 +1,14 @@
+create instance
+enter name
+choose ubuntu
+choose key pair and create new key pair
+give name
+use rsa
+use.ppk file
+
+create instance (note instance shud be stopped or deleted whn logging out)
+
+
+create security group
+under network sec-> create sec group
+give name desc all traffic ipv4
